@@ -8,8 +8,9 @@
 
         protected string baseURL = "http://facebook.com/";
 
-        protected string email = "ENTER USER NAME AND PASSWORD IN TestBase/TestBase.cs";
+        protected string email = "";
         protected string password = "";
+
 
         [TestInitialize]
         public void Setup()
@@ -19,18 +20,50 @@
             options.AddArgument("--disable-notifications");
             driver = new ChromeDriver(options);
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);  
-            
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);              
         }
 
 
         [TestCleanup]
         public void TestCleanup()
         {
-            // Clean up resources after each test
             driver.Quit();
             driver.Dispose();
             Console.WriteLine("UI TEST CLEANUP COMPLETE");
         }
+
+   
+
+        public string jira(int ticketNumber)
+        {
+            return $"\nhttps://jira.com/JiraProjectName-{ticketNumber}";
+        }
+
+        public string jira(int[] ticketNumbers)
+        {
+            string tickets = "";
+            foreach (int ticket in ticketNumbers)
+            {
+                tickets += $"\nhttps://jira.com/JiraProjectName-{ticket}, ";
+            }
+            return tickets;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
     }
 }
